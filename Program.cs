@@ -39,11 +39,19 @@ namespace Health_System_v1._0
             ShowHUD(); 
             TakeDamage(damage);
             ShowHUD();
+            
             Console.ReadKey(true);
         }
 
         static void ShowHUD()
         {
+            if (health == 0)
+            {
+                lives = lives - 1;
+                health = 100;
+
+            }
+            
             if (shield < 0)
             {
                 shield = 0;
@@ -105,41 +113,36 @@ namespace Health_System_v1._0
 
         static void TakeDamage(int damage)
         {
+           
+
             if (damage > shield)
             {
                 spillover = damage - shield;
                 health = health - spillover;
                 shield = shield - damage;
             }
-                if (health == 0)
-                {
-                    lives = lives - 1;
-                    health = 100;
-                    shield = 100;
-                }
-            
+            if (health == 0)
+            {
+                lives = lives - 1;
+                health = 100;
+
+            }
+
+
             else if (shield > 0)
             {
                 shield = shield - damage;
 
             }
-            else if (shield <= 0)
-            {
+           
 
-                health = health - damage;
-
-                if (health <= 0)
-                {
-                    lives = lives - 1;
-                    health = health + 100;
-
-                }
+              
             
 
 
 
 
-                if (lives == 0)
+                else if (lives == 0)
                 {
                     Console.WriteLine("Out of Lives! The Game is Over!!!");
                     health = 0;
@@ -162,7 +165,7 @@ namespace Health_System_v1._0
 
 
 
-            }
+            
         }
 
         static void Heal(int hp)
