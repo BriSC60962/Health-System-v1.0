@@ -105,25 +105,26 @@ namespace Health_System_v1._0
 
         static void TakeDamage(int damage)
         {
-          
-             if (shield > 0)
+            if (damage > shield)
+            {
+                spillover = damage - shield;
+                health = health - spillover;
+                shield = shield - damage;
+            }
+                if (health == 0)
+                {
+                    lives = lives - 1;
+                    health = 100;
+                    shield = 100;
+                }
+            
+            else if (shield > 0)
             {
                 shield = shield - damage;
-                
+
             }
-            else if (damage > shield)
-                {
-                    spillover = damage - shield;
-                    health = health - spillover;
-                    if (health == 0)
-                    {
-                        lives = lives - 1;
-                        health = health + 100;
-                        shield = shield + 100;
-                    }
-                }
-                else if (shield <= 0)
-                {
+            else if (shield <= 0)
+            {
 
                 health = health - damage;
 
@@ -131,37 +132,37 @@ namespace Health_System_v1._0
                 {
                     lives = lives - 1;
                     health = health + 100;
-                    
+
                 }
-            }
             
-          
-           
 
-           if (lives == 0)
-            {
-                Console.WriteLine("Out of Lives! The Game is Over!!!");
-                health = 0;
-                shield = 0;
+
+
+
+                if (lives == 0)
+                {
+                    Console.WriteLine("Out of Lives! The Game is Over!!!");
+                    health = 0;
+                    shield = 0;
+
+                }
+                else if (lives < 0)
+                {
+                    Console.WriteLine("Error Message: Cannot lose more lives than 0...");
+                    lives = 0;
+
+                }
+
+
+
+
+
+
+
+
+
 
             }
-            else if (lives < 0)
-            {
-                Console.WriteLine("Error Message: Cannot lose more lives than 0...");
-                lives = 0;
-
-            }
-
-
-
-
-
-
-
-
-
-
-
         }
 
         static void Heal(int hp)
