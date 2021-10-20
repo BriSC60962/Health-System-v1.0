@@ -21,7 +21,6 @@ namespace Health_System_v1._0
 
         static void Main(string[] args)
         {
-            
             Console.WriteLine("Health System");
             Console.WriteLine("By Brianna Chisholm");
             Console.WriteLine("///////////////////////");
@@ -227,10 +226,15 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
+            lives = lives - 2;
+            Console.WriteLine();
+            damage = 220;
+            TakeDamage(damage);
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
 
-
-
-
+         
 
 
         }
@@ -347,13 +351,16 @@ namespace Health_System_v1._0
             if (health <= 0)
             {
                 Console.WriteLine("Player lost a life.");
-                Console.WriteLine("Player used a 1UP and restored their Health and Shield!");
-                Console.WriteLine();
+                if (lives < 0)
+                {
+                    health = 100;
+                    shield = 100;
+                    Console.WriteLine("Player used a 1UP and restored their Health and Shield!");
+                    Console.WriteLine();
+                }
+                
                 lives = lives - 1;
-                health = 100;
-                shield = 100;
-
-
+                
             }
 
             else if (shield > 0)
