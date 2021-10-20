@@ -21,6 +21,7 @@ namespace Health_System_v1._0
 
         static void Main(string[] args)
         {
+            
             Console.WriteLine("Health System");
             Console.WriteLine("By Brianna Chisholm");
             Console.WriteLine("///////////////////////");
@@ -135,6 +136,103 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
+            Console.WriteLine();
+            hp = 100;
+            RegenerateShield(hp);
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine("Resetting...");
+            Reset();
+            Console.WriteLine();
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine();
+            damage = 50;
+            TakeDamage(damage);
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine();
+            hp = 100;
+            RegenerateShield(hp);
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine("Resetting...");
+            Reset();
+            Console.WriteLine();
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine();
+            hp = -100;
+            RegenerateShield(hp);
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine("Resetting...");
+            Reset();
+            Console.WriteLine();
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine();
+            score = 10;
+            Experience(score);
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine("Resetting...");
+            Reset();
+            Console.WriteLine();
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine();
+            score = 100;
+            Experience(score);
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine("Resetting...");
+            Reset();
+            Console.WriteLine();
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine();
+            score = -10;
+            Experience(score);
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine("Resetting...");
+            Reset();
+            Console.WriteLine();
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+
+
+
+
+
+
         }
         static void ShowHUD()
         {
@@ -207,11 +305,23 @@ namespace Health_System_v1._0
         }
         static void Experience(int score)
         {
+            Console.WriteLine("DEBUG: Player is adding " + score + " to their Exp!");
+            Console.WriteLine();
+
+            if (score < 0)
+            {
+                Console.WriteLine("ERROR: Cannot add negative Exp, must be a positive number");
+                Console.WriteLine();
+                score = 0;
+            }
             exp = exp + score;
+            
+           
 
             if (exp == 100)
             {
-                Console.WriteLine("Level Up!");
+                Console.WriteLine("DEBUG: Player has earned a Level Up!");
+                Console.WriteLine();
                 level = level + 1;
             }
         }
@@ -287,7 +397,7 @@ namespace Health_System_v1._0
         }
         static void Reset()
         {
-            exp = 100;
+            exp = 0;
             level = 1;
             shield = 100;
             health = 100;
