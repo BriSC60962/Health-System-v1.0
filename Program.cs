@@ -20,10 +20,12 @@ namespace Health_System_v1._0
         static int hp;
 
         static void Main(string[] args)
-        {
+        {   //Simulated
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Health System");
             Console.WriteLine("By Brianna Chisholm");
             Console.WriteLine("///////////////////////");
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey(true);
 
             Console.WriteLine();
@@ -37,7 +39,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -51,7 +53,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -65,7 +67,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -79,7 +81,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -93,7 +95,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -114,7 +116,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -128,7 +130,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -142,7 +144,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -163,7 +165,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -177,7 +179,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -191,7 +193,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -205,7 +207,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -219,13 +221,17 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            Console.WriteLine("Resetting...");
+            
             Reset();
             Console.WriteLine();
             ShowHUD();
             Console.WriteLine();
             Console.ReadKey(true);
 
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("DEBUG: Lives have been reduced to 1 for demonstrations");
+            Console.ForegroundColor = ConsoleColor.Gray;
             lives = lives - 2;
             Console.WriteLine();
             damage = 220;
@@ -234,12 +240,23 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-         
+            Console.WriteLine();
+            damage = 100;
+            TakeDamage(damage);
+            ShowHUD();
+            Console.WriteLine();
+            Console.ReadKey(true);
+
+            Console.WriteLine("END");
+            Console.ReadKey(true);
+
 
 
         }
+        //Player Statistics/ Hud Method
         static void ShowHUD()
         {
+            //Range Checking for Health, Shield, Lives
             if (shield < 0)
             {
                 shield = 0;
@@ -307,14 +324,20 @@ namespace Health_System_v1._0
 
 
         }
+        //Exp and Leveling Method
         static void Experience(int score)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("DEBUG: Player is adding " + score + " to their Exp!");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ReadKey(true);
             Console.WriteLine();
 
             if (score < 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: Cannot add negative Exp, must be a positive number");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine();
                 score = 0;
             }
@@ -324,22 +347,27 @@ namespace Health_System_v1._0
 
             if (exp == 100)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("DEBUG: Player has earned a Level Up!");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine();
                 level = level + 1;
             }
         }
-
+            //Code Impacting Health, Shield and Lives
         static void TakeDamage(int damage)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("DEBUG: Player is about to take " + damage + " hit points of damage...");
+            Console.ReadKey(true);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Gray;
 
             if(damage < 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: Cannot take Damage of a negative value, must be a positive value");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 damage = 0;
             }
             if (damage > shield)
@@ -350,41 +378,43 @@ namespace Health_System_v1._0
             }
             if (health <= 0)
             {
-                Console.WriteLine("Player lost a life.");
-                if (lives < 0)
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("DEBUG: Player lost a life.");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                lives = lives - 1;
+
+                if (lives == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("DEBUG: Out of Lives.");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    
+
+                }
+                
+                else if (lives > 0)
                 {
                     health = 100;
                     shield = 100;
-                    Console.WriteLine("Player used a 1UP and restored their Health and Shield!");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("DEBUG: Player used a 1UP and restored their Health and Shield!");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine();
                 }
-                
-                lives = lives - 1;
-                
-            }
 
+            }
+            
             else if (shield > 0)
             {
                 shield = shield - damage;
 
             }
 
-
-
-
-
-
-
-            if (lives == 0)
+            if (lives < 0)
             {
-                Console.WriteLine("Out of Lives! The Game is Over!!!");
-                health = 0;
-                shield = 0;
-
-            }
-            else if (lives < 0)
-            {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error Message: Cannot lose more lives than 0...");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 lives = 0;
                 health = 0;
                 shield = 0;
@@ -404,6 +434,10 @@ namespace Health_System_v1._0
         }
         static void Reset()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("DEBUG: RESET");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ReadKey(true);
             exp = 0;
             level = 1;
             shield = 100;
@@ -412,13 +446,19 @@ namespace Health_System_v1._0
 
         }
 
+        //Health and Shield Regeneration Methods
         static void Heal(int hp)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("DEBUG: Player is about to Heal by " + hp + " hit points");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ReadKey(true);
             Console.WriteLine();
             if (hp < 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: Cannot Heal Player by a negative number, must be a positive number");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine();
                 hp = 0;
             }
@@ -427,11 +467,16 @@ namespace Health_System_v1._0
 
         static void RegenerateShield(int hp)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("DEBUG: Player is about to Regenerate Shield by " + hp + " hit points");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ReadKey(true);
             Console.WriteLine();
             if (hp < 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: Cannot Regenerate Shield by a negative number, must be a positive number");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine();
                 hp = 0;
             }
