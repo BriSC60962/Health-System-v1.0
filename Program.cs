@@ -494,7 +494,11 @@ namespace Health_System_v1._0
             Debug.Assert(shield >= 0);
             Debug.Assert(health == 100);
 
+            Console.WriteLine("Success");
+
+
             Console.WriteLine();
+            Console.WriteLine("Testing Heal() on Health...");
             hp = 100;
             Heal(hp);
             Debug.Assert(health == 100);
