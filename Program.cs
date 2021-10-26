@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Health_System_v1._0
 {
@@ -21,13 +22,14 @@ namespace Health_System_v1._0
 
         static void Main(string[] args)
         {   //Simulated
+            UnitTest();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Health System");
             Console.WriteLine("By Brianna Chisholm");
             Console.WriteLine("///////////////////////");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey(true);
-
+            
             Console.WriteLine();
             ShowHUD();
             Console.ReadKey(true);
@@ -230,7 +232,7 @@ namespace Health_System_v1._0
 
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("DEBUG: Lives have been reduced to 1 for demonstrations");
+            Console.WriteLine("Lives have been reduced to 1 for demonstrations");
             Console.ForegroundColor = ConsoleColor.Gray;
             lives = lives - 2;
             Console.WriteLine();
@@ -328,7 +330,7 @@ namespace Health_System_v1._0
         static void Experience(int score)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("DEBUG: Player is adding " + score + " to their Exp!");
+            Console.WriteLine("Player is adding " + score + " to their Exp!");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey(true);
             Console.WriteLine();
@@ -348,7 +350,7 @@ namespace Health_System_v1._0
             if (exp == 100)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("DEBUG: Player has earned a Level Up!");
+                Console.WriteLine("Player has earned a Level Up!");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine();
                 level = level + 1;
@@ -358,7 +360,7 @@ namespace Health_System_v1._0
         static void TakeDamage(int damage)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("DEBUG: Player is about to take " + damage + " hit points of damage...");
+            Console.WriteLine("Player is about to take " + damage + " hit points of damage...");
             Console.ReadKey(true);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -379,14 +381,14 @@ namespace Health_System_v1._0
             if (health <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("DEBUG: Player lost a life.");
+                Console.WriteLine("Player lost a life.");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 lives = lives - 1;
 
                 if (lives == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("DEBUG: Out of Lives.");
+                    Console.WriteLine("Out of Lives.");
                     Console.ForegroundColor = ConsoleColor.Gray;
                     
 
@@ -481,6 +483,23 @@ namespace Health_System_v1._0
                 hp = 0;
             }
             shield = shield + hp;
+        }
+        static void UnitTest()
+        {
+            Console.WriteLine("Testing TakeDamage() on Shield...");
+            damage = 40;
+
+            TakeDamage(damage);
+            
+            Debug.Assert(shield >= 0);
+            Debug.Assert(health == 100);
+
+            Console.WriteLine();
+            hp = 100;
+            Heal(hp);
+            Debug.Assert(health == 100);
+
+
         }
     }
 }
