@@ -399,7 +399,7 @@ namespace Health_System_v1._0
                     health = 100;
                     shield = 100;
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("DEBUG: Player used a 1UP and restored their Health and Shield!");
+                    Console.WriteLine("Player used a 1UP and restored their Health and Shield!");
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine();
                 }
@@ -452,7 +452,7 @@ namespace Health_System_v1._0
         static void Heal(int hp)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("DEBUG: Player is about to Heal by " + hp + " hit points");
+            Console.WriteLine("Player is about to Heal by " + hp + " hit points");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey(true);
             Console.WriteLine();
@@ -470,7 +470,7 @@ namespace Health_System_v1._0
         static void RegenerateShield(int hp)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("DEBUG: Player is about to Regenerate Shield by " + hp + " hit points");
+            Console.WriteLine("Player is about to Regenerate Shield by " + hp + " hit points");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey(true);
             Console.WriteLine();
@@ -493,17 +493,125 @@ namespace Health_System_v1._0
             
             Debug.Assert(shield >= 0);
             Debug.Assert(health == 100);
+            Reset();
+            damage = 125;
+            TakeDamage(damage);
+            if (shield < 0)
+            {
+                shield = 0;
+            }
+            Debug.Assert(shield >= 0);
+            Debug.Assert(health <= 100);
+            Reset();
 
+            damage = 250;
+            TakeDamage(damage);
+            if (shield < 0)
+            {
+                shield = 0;
+            }
+            if (health < 0)
+            {
+                health = 0;
+            }
+
+            Debug.Assert(shield >= 0);
+            Debug.Assert(health <= 100);
+            Debug.Assert(lives < 3);
+            Reset();
+
+            damage = -10;
+            TakeDamage(damage);
+
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+
+            Debug.Assert(shield == 100);
+            Debug.Assert(health == 100);
             Console.WriteLine("Success");
-
+            Reset();
 
             Console.WriteLine();
             Console.WriteLine("Testing Heal() on Health...");
             hp = 100;
             Heal(hp);
+            if (health > 100)
+            {
+                health = 100;
+            }
             Debug.Assert(health == 100);
+            Reset();
 
+            damage = 150;
+            TakeDamage(damage);
+            hp = 100;
+            Heal(hp);
+            if (health > 100)
+            {
+                health = 100;
+            }
+            Debug.Assert(health == 100);
+            Reset();
 
+            hp = -100;
+            Heal(hp);
+            if (hp < 0)
+            {
+                hp = 0;
+            }
+            Debug.Assert(health == 100);
+            Reset();
+
+            hp = 100;
+            RegenerateShield(hp);
+            if (shield > 100)
+            {
+                shield = 100;
+            }
+            Debug.Assert(shield == 100);
+            Reset();
+
+            damage = 50;
+            TakeDamage(damage);
+            hp = 100;
+            RegenerateShield(hp);
+            if (shield > 100)
+            {
+                shield = 100;
+            }
+            Debug.Assert(shield == 100);
+            Reset();
+
+            hp = -100;
+            RegenerateShield(hp);
+            if (hp < 0)
+            {
+                hp = 0;
+            }
+            Debug.Assert(shield == 100);
+            Reset();
+
+            score = 10;
+            Experience(score);
+            Debug.Assert(score > 0);
+
+            Reset();
+
+            score = 100;
+            Experience(score);
+            Debug.Assert(score == 100);
+            Debug.Assert(level == 2);
+
+            score = -10;
+            Experience(score);
+            if (score < 0)
+            {
+                score = 0;
+            }
+            Debug.Assert(score == 0);
+          
         }
     }
 }
