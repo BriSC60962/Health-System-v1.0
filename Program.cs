@@ -20,8 +20,10 @@ namespace Health_System_v1._0
         static int score;
         static int hp;
 
+
         static void Main(string[] args)
         {   //Simulated
+
             UnitTest();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Health System");
@@ -29,11 +31,11 @@ namespace Health_System_v1._0
             Console.WriteLine("///////////////////////");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey(true);
-            
+
             Console.WriteLine();
             ShowHUD();
             Console.ReadKey(true);
-            
+
             Console.WriteLine();
             damage = 40;
             TakeDamage(damage);
@@ -41,7 +43,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -55,7 +57,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -69,7 +71,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -83,7 +85,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -97,7 +99,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -118,7 +120,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -132,7 +134,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -146,7 +148,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -167,7 +169,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -181,7 +183,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -195,7 +197,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -209,7 +211,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -223,7 +225,7 @@ namespace Health_System_v1._0
             Console.WriteLine();
             Console.ReadKey(true);
 
-            
+
             Reset();
             Console.WriteLine();
             ShowHUD();
@@ -258,7 +260,6 @@ namespace Health_System_v1._0
         //Player Statistics/ Hud Method
         static void ShowHUD()
         {
-            //Range Checking for Health, Shield, Lives
             if (shield < 0)
             {
                 shield = 0;
@@ -283,7 +284,6 @@ namespace Health_System_v1._0
             {
                 lives = 99;
             }
-
 
 
             if (health == 100)
@@ -344,8 +344,8 @@ namespace Health_System_v1._0
                 score = 0;
             }
             exp = exp + score;
-            
-           
+
+
 
             if (exp == 100)
             {
@@ -356,16 +356,17 @@ namespace Health_System_v1._0
                 level = level + 1;
             }
         }
-            //Code Impacting Health, Shield and Lives
+        //Code Impacting Health, Shield and Lives
         static void TakeDamage(int damage)
         {
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Player is about to take " + damage + " hit points of damage...");
             Console.ReadKey(true);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            if(damage < 0)
+            if (damage < 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: Cannot take Damage of a negative value, must be a positive value");
@@ -390,10 +391,10 @@ namespace Health_System_v1._0
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Out of Lives.");
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    
+
 
                 }
-                
+
                 else if (lives > 0)
                 {
                     health = 100;
@@ -405,7 +406,7 @@ namespace Health_System_v1._0
                 }
 
             }
-            
+
             else if (shield > 0)
             {
                 shield = shield - damage;
@@ -423,7 +424,24 @@ namespace Health_System_v1._0
 
             }
 
+            if (shield < 0)
+            {
+                shield = 0;
+            }
 
+            if (health < 0)
+            {
+                health = 0;
+            }
+
+            if (lives < 0)
+            {
+                lives = 0;
+            }
+            if (lives > 99)
+            {
+                lives = 99;
+            }
 
 
 
@@ -465,6 +483,10 @@ namespace Health_System_v1._0
                 hp = 0;
             }
             health = health + hp;
+            if (health > 100)
+            {
+                health = 100;
+            }
         }
 
         static void RegenerateShield(int hp)
@@ -483,135 +505,121 @@ namespace Health_System_v1._0
                 hp = 0;
             }
             shield = shield + hp;
+            if (shield > 100)
+            {
+                shield = 100;
+            }
         }
         static void UnitTest()
         {
-            Console.WriteLine("Testing TakeDamage() on Shield...");
             damage = 40;
 
             TakeDamage(damage);
-            
+
             Debug.Assert(shield >= 0);
             Debug.Assert(health == 100);
+            Console.WriteLine();
+
+            Console.WriteLine();
             Reset();
+
             damage = 125;
             TakeDamage(damage);
-            if (shield < 0)
-            {
-                shield = 0;
-            }
+
             Debug.Assert(shield >= 0);
+            Debug.Assert(shield <= 100);
+            Debug.Assert(health >= 0);
             Debug.Assert(health <= 100);
+            Console.WriteLine();
+
+            Console.WriteLine();
             Reset();
 
             damage = 250;
             TakeDamage(damage);
-            if (shield < 0)
-            {
-                shield = 0;
-            }
-            if (health < 0)
-            {
-                health = 0;
-            }
+
 
             Debug.Assert(shield >= 0);
             Debug.Assert(health <= 100);
             Debug.Assert(lives < 3);
+            Console.WriteLine("Success");
+            Console.WriteLine();
             Reset();
 
             damage = -10;
             TakeDamage(damage);
 
-            if (damage < 0)
-            {
-                damage = 0;
-            }
+
 
             Debug.Assert(shield == 100);
             Debug.Assert(health == 100);
             Console.WriteLine("Success");
             Reset();
 
-            Console.WriteLine();
-            Console.WriteLine("Testing Heal() on Health...");
+
             hp = 100;
             Heal(hp);
-            if (health > 100)
-            {
-                health = 100;
-            }
+
             Debug.Assert(health == 100);
             Reset();
+
 
             damage = 150;
             TakeDamage(damage);
             hp = 100;
             Heal(hp);
-            if (health > 100)
-            {
-                health = 100;
-            }
+
             Debug.Assert(health == 100);
             Reset();
 
+
             hp = -100;
             Heal(hp);
-            if (hp < 0)
-            {
-                hp = 0;
-            }
+
             Debug.Assert(health == 100);
             Reset();
 
             hp = 100;
             RegenerateShield(hp);
-            if (shield > 100)
-            {
-                shield = 100;
-            }
+
             Debug.Assert(shield == 100);
             Reset();
+
 
             damage = 50;
             TakeDamage(damage);
             hp = 100;
             RegenerateShield(hp);
-            if (shield > 100)
-            {
-                shield = 100;
-            }
+
             Debug.Assert(shield == 100);
             Reset();
 
+
             hp = -100;
             RegenerateShield(hp);
-            if (hp < 0)
-            {
-                hp = 0;
-            }
+
             Debug.Assert(shield == 100);
             Reset();
 
             score = 10;
             Experience(score);
-            Debug.Assert(score > 0);
+            Debug.Assert(exp > 0);
 
             Reset();
 
             score = 100;
             Experience(score);
-            Debug.Assert(score == 100);
+            Debug.Assert(exp == 100);
             Debug.Assert(level == 2);
+
+            Reset();
 
             score = -10;
             Experience(score);
-            if (score < 0)
-            {
-                score = 0;
-            }
-            Debug.Assert(score == 0);
-          
+
+            Debug.Assert(exp == 0);
+
         }
     }
 }
+
